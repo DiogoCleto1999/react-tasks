@@ -4,8 +4,10 @@ import Title from "./components/Title";
 import Tasks from "./components/Tasks.jsx/Tasks";
 import Persons from "./components/Persons/Persons";
 import AddPerson from "./components/Persons/AddPerson";
-
+import { useSelector } from "react-redux";
 function App() {
+  const { persons = [] } = useSelector((state) => state.tasksReducer) || {};
+
   const [personsTasks, setPersonsTasks] = useState([
     {
       person: "Maria",
@@ -39,7 +41,7 @@ function App() {
       <div className="w-[500px] space-y-4">
         <Title>Gerenciador de Tarefas</Title>
         <AddPerson />
-        <Persons personsTasks={personsTasks} />
+        {persons.length != 0 && <Persons personsTasks={personsTasks} />}
       </div>
     </div>
   );
